@@ -1,0 +1,1171 @@
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>            
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+        <style type="text/css">
+          /* Three image containers (use 25% for four, and 50% for two, etc) */
+              .column {
+                float: left;
+                width: 50%;
+                padding: 20px 0px 0px 50px;
+              }
+
+              @media screen and (max-width: 500px) {
+                .column {
+                  width: 100%;
+                }
+              }
+
+              /* Clear floats after image containers */
+              .row::after {
+                content: "";
+                clear: both;
+                display: table;
+              }
+            
+            .buttons {                
+                border-radius:4px;
+                display:inline-block;
+                cursor:pointer;
+                font-family:Arial;
+                font-size:13px;
+                font-weight:bold;
+                padding:6px 15px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #5b8a3c;
+                margin-left: 6px;
+                width: 100px;
+            }
+            
+            .aibtn {
+                border-radius:4px;
+                color: #ffffff;
+                display:inline-block;
+                cursor:pointer;
+                font-family:Arial;
+                font-size:13px;
+                font-weight:bold;
+                padding:6px 15px;
+                text-decoration:none;
+                width: 200px;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                background:linear-gradient(to bottom, #f8df20 5%, #f8df20 100%);
+                border-color:transparent #f5e77a #d3bc0d transparent;
+                color:#000000;
+                background-color:#2b638f;
+                background-clip:padding-box;
+            }per
+            
+            #inter_btn {
+                color:#ffffff;
+                background:linear-gradient(to bottom, #a8a8a8 5%, #a8a8a8 100%);
+                background-color: #a8a8a8;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #dddddd #c1c1c1 transparent;
+                background-clip:padding-box;
+            }
+            
+            #next_btn {
+                color:#ffffff;
+                background:linear-gradient(to bottom, #382d0f 5%, #382d0f 100%);
+                background-color: #382d0f;
+                border: solid 5px #000;
+                border-width:0 4px 5px 0;
+                border-radius:5px;
+                border-color:transparent #495159 #20374f transparent;
+                background-clip:padding-box;
+            }
+            
+            .buttons:active {
+                position:relative;
+                top:1px;
+            }
+            
+            .border {
+                border-width:10px !important;
+            }
+            
+            .progress .bar {
+                -webkit-transition: none !important;
+                -moz-transition: none !important;
+                -ms-transition: none !important;
+                -o-transition: none !important;
+                transition: none !important;
+            }
+            
+            #start_btn {
+                box-shadow:inset 0px 1px 3px 0px #91b8b3;
+                background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+                background-color:#768d87;
+                border-radius:5px;
+                border:1px solid #566963;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:15px;
+                font-weight:bold;
+                padding:11px 23px;
+                text-decoration:none;
+                text-shadow:0px -1px 0px #2b665e;
+            }
+            #start_btn:hover {
+                background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+                background-color:#6c7c7c;
+            }
+            #start_btn:active {
+                position:relative;
+                top:1px;
+            }
+            
+            #stamp {
+                position:absolute;
+                width: 400px;
+                height: 400px;
+                left:50%;
+                top:50%;
+                z-index: 100;
+                margin-left: -200px;
+                margin-top: 80px;
+            }
+            .tooltip.show p {
+               text-align:left;
+             }
+            
+            .tooltip.show em {
+               text-align:left;
+             }
+
+             .carousel-control-prev-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+            }
+
+            .carousel-control-next-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+            }
+
+        </style>
+        
+        <script language='Javascript'>
+            var not_started = true;
+            var qualtrics_id = '';
+            var start_state = 0;
+            
+            function loadFile(filePath) {
+                var result = null;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", filePath, false);
+                xmlhttp.send();
+                if (xmlhttp.status==200) {
+                    result = xmlhttp.responseText;
+                }
+                return result;
+            }
+            
+            function start_btn_event() {
+                // check if extension is enabled
+                if(can_continue == false) {
+                    alert('Please enable the "Allow CORS" extention and refresh the page');
+                    return ;
+                }
+                
+                if (start_state == 0 && document.getElementById('validation_quiz').style.visibility == 'hidden') {
+                    // display the validation quiz
+                    document.getElementById('validation_quiz').style.visibility = 'visible';
+                } 
+                else if (start_state == 0 && document.getElementById('validation_quiz').style.visibility == 'visible') {
+                    // validate form
+                    if(document.getElementById('nosering2').checked || document.getElementById('multipleans2').checked || document.getElementById('tf2').checked) {
+                        var filenames = loadFile("https://difftask.s3.amazonaws.com/40_pairs_set3.txt").split('\n');
+                        for (var i=0; i<filenames.length; i++) {
+                            files.push(filenames[i].split(', '));
+                        }
+                        current_pair_ind = 0 // Math.floor((Math.random() * (filenames.length - 1)));
+                        document.getElementById('start_btn').style.visibility = 'hidden';
+                        document.getElementById('survey_form').style.visibility = 'visible';
+                        not_started = false;
+                        document.getElementById('survey_form').style.visibility = 'visible';
+                        document.getElementById('start_btn').remove();
+                        document.getElementById('validation_quiz').remove();
+                        document.getElementById('helpingslides').remove();
+                    }
+                    else{
+                        // submit the survey to MTurk
+                        var a = 0;
+                        var b = 0;
+                        var c = 0;
+
+                        if (document.getElementById('nosering1').checked) {
+                            a = 1;
+                        } else if (document.getElementById('nosering2').checked) {
+                            a = 2;
+                        } else if (document.getElementById('nosering3').checked){
+                            a = 3;
+                        } else {
+                            a = -1;
+                        }
+
+                        if (document.getElementById('multipleans1').checked) {
+                            b = 1;
+                        } else if (document.getElementById('multipleans2').checked) {
+                            b = 2;
+                        } else if (document.getElementById('multipleans3').checked){
+                            b = 3;
+                        } else {
+                            b = -1;
+                        }
+
+                        if (document.getElementById('tf1').checked) {
+                            c = 1;
+                        } else if (document.getElementById('tf2').checked) {
+                            c = 2;
+                        } else {
+                            c = -1;
+                        }
+
+                        if (a == -1 && b == -1 && c == -1) {
+                            alert("Please Complete the Quiz!");
+                            return false;
+                        }
+
+                        alert("Quiz Failed!");
+                        // console.log(a, b, c);
+                        $("#mturk_form").submit( function(eventObj) {
+                            $("<input />").attr("type", "hidden")
+                                .attr("name", "validation_quiz")
+                                .attr("value", "failed!")
+                                .appendTo("#mturk_form");
+
+                            $("<input />").attr("type", "hidden")
+                                .attr("name", "nosering_validation")
+                                .attr("value", a)
+                                .appendTo("#mturk_form");
+
+                            $("<input />").attr("type", "hidden")
+                                .attr("name", "multiple_validation")
+                                .attr("value", b)
+                                .appendTo("#mturk_form");
+
+                            $("<input />").attr("type", "hidden")
+                                .attr("name", "tf_validation")
+                                .attr("value", c)
+                                .appendTo("#mturk_form");
+
+                            return true;
+                        });
+
+                        document.getElementById('submitButton').click();
+                    }
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <!-- <script src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js' type='text/javascript'></script> -->
+        <div id="my_survey">
+            <div class="container" id="top_container">
+
+                <div id="helpingslides" class="carousel slide" data-ride="carousel">
+                    <div class="row align-middle mx-auto d-block" id="helptext" style="padding-top: 50px;"><h3>Please look through the slides first:</h3></div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/0.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/1.png">
+                        <a style="padding-left: 200;" target="_blank" href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">Download for Chrome</a> | 
+                        <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/access-control-allow-origin/">Download for Firefox</a>
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/2.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/3.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/4.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/5.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/6.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/7.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/8.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/9.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/10.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/11.png">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="https://difftask.s3.amazonaws.com/slides/12.png">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#helpingslides" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#helpingslides" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+
+                <!-- Validation quiz -->
+                <div id="validation_quiz" class='row align-middle mx-auto d-block'>
+                    <div class="row align-middle mx-auto d-block" id="helptext" style="padding-top: 50px;"><h3>Complete the following quiz to continue:</h3></div>
+                    <form id="validation_form">
+                        <div class="form-group">
+                            <label for="img_1p" id="img_1_text"><strong>Nose ring is categorized as a kind of ...</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nosering" id="nosering1" value="makeup">
+                                <label class="form-check-label" for="nosering1">
+                                  Makeup
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nosering" id="nosering2" value="occlusion">
+                                <label class="form-check-label" for="nosering2">
+                                  Occlusion
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="nosering" id="nosering3" value="poorimageq">
+                                <label class="form-check-label" for="nosering3">
+                                  Poor Image Quality
+                                </label>
+                              </div>
+
+                              <label for="img_1p" id="img_1_text"><strong>What item can have multiple answer?</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="multipleans" id="multipleans1" value="makeup">
+                                <label class="form-check-label" for="multipleans1">
+                                  Makeup
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="multipleans" id="multipleans2" value="occlusion">
+                                <label class="form-check-label" for="multipleans2">
+                                  Occlusion
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="multipleans" id="multipleans3" value="poorimageq">
+                                <label class="form-check-label" for="multipleans3">
+                                  Poor Image Quality
+                                </label>
+                              </div>
+
+                            <label for="img_1p" id="img_1_text"><strong>True of False? If a hand or another part of the body was visible in an image, it is not important for the purpose of this study.</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tf" id="tf1" value="true">
+                                <label class="form-check-label" for="tf1">
+                                  True
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tf" id="tf2" value="false">
+                                <label class="form-check-label" for="tf2">
+                                  False
+                                </label>
+                              </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class='row align-middle mx-auto d-block'>
+                    <button id="start_btn" style="margin-top: 50px; padding: 20px; visibility: hidden;" type="button" onclick="start_btn_event()" class="vertical-center align-middle mx-auto d-block">Start Survey</button>
+                </div>
+            </div>
+            <div id="survey_form" style="visibility: hidden;">
+                <!-- HTML to handle creating the HIT form -->
+                <form name='mturk_form' method='post' id='mturk_form' action='https://analog-height-296717.uc.r.appspot.com/record_results'>
+                <input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+                <!-- This is where you define your question(s) --> 
+                    
+                <div class="container" >
+                
+                    <div class="row" style="margin-top: 20px;">
+                    <!-- images row -->
+                        
+                        <div class="col"></div>
+                        
+                        <div class="col" style="padding-left: 150px;">
+                            <strong>Image 1</strong>
+                        </div>
+
+                        <div class="col float-left" style="margin-left: 70px;">
+                            <strong>Image 2</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="margin-top: 20px;">
+                    <!-- images row -->
+                        
+                        <div class="col"></div>
+                        
+                        <div class="col">
+                            <img id="img1" src="" alt="img1" style="width:200px;height:200px;">
+                        </div>
+
+                        <div class="col align-self-center">
+                            <img id="img2" src="" alt="img2" style="width:200px;height:200px;" class="float-left">
+                        </div>
+                    </div>
+                    
+                    <hr />
+                    
+                    <!-- SET OPTIONS HERE -->
+                    <div class="row" id='same_text' style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="img_1_text">
+                                <button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title="<em><p>Are these images of the same identity (person)?</p></em>">
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Same Person?</strong>
+                            </label>
+                            <!-- <a data-toggle="tooltip" title="Information Placeholder">
+                                <i class="material-icons">info</i>
+                            </a> -->
+                        </div>
+                        <div class="col text-right" style="padding-left: 130px;">
+                            <select class="selectpicker" data-width="200px" id="same" name="same"  tabindex="1">
+                                <option value='none'>Select</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                                <option value='unsure'>Unsure</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                    
+                    <div class="row" id='age_text' style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="img_1_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title="<em><p>Are the person(s) of the same age when the photos were taken?</p></em>">
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Same Age?</strong></label>
+                        </div>
+                        <div class="col text-right" style="padding-left: 130px;">
+                            <select class="selectpicker" data-width="200px" id="age" name="age" tabindex="2">
+                                <option value='none'>Age</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                    
+                    <div class="row" id='color_text' style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="img_1_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>Are the hair color of the two images approximately similar? If not possible to make a decision because hair is not visible, select "Cannot see hair in one or both images".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Same Hair Color?</strong></label>
+                        </div>
+                        <div class="col text-right" style="padding-left: 130px;">
+                            <select class="selectpicker" data-width="200px" id="color" name="color" tabindex="3">
+                                <option value='none'>Hair Color</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                                <option value='cannot'>Cannot See Hair in One or Both Images</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                    
+                    <div class="row" id='hair_text' style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="img_1_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" placement="auto" data-html="true" title='<em><p>Are the hair styles of the two images approximately similar? If not possible to make a decision because hair is not visible, select "Cannot see hair in one or both images".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Same Hair Style?</strong></label>
+                        </div>
+                        <div class="col text-right" style="padding-left: 130px;">
+                            <select class="selectpicker" data-width="200px" id="hair" name="hair" tabindex="4">
+                                <option value='none'>Hair Style</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                                <option value='cannot'>Cannot See Hair in One or Both Images</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>     
+                    
+                    <div class="row" id='genders_pick' style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="gender_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title="<em><p>Your best estimate of each image’s gender.</p></em>">
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Select Gender:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="gender_1" name="gender_1" tabindex="5">
+                                <option value='none'>Select Gender</option>
+                                <option value='male'>Man</option>
+                                <option value='female'>Woman</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="gender_2" name="gender_2" tabindex="6">
+                                <option value='none'>Select Gender</option>
+                                <option value='male'>Man</option>
+                                <option value='female'>Woman</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="races_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="race_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>Your best estimate of each image’s race classification. If not in the choices, select "Other". If unsure, select "Unsure".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Select Race:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="race_1" name="race_1" tabindex="7">
+                                <option value='none'>Select Race</option>
+                                <option value='caucasian'>Caucasian</option>
+                                <option value='asian'>Asian</option>
+                                <option value='asianI'>Asian - Indian</option>
+                                <option value='asianME'>Asian - Middle Eastern</option>
+                                <option value='black'>Black</option>
+                                <option value='native'>Native American/Pacific Islander</option>
+                                <option value='hispanic'>Latino/Latina/Latinx</option>
+                                <option value='other'>Other</option>
+                                <option value='unsure'>Unsure</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="race_2" name="race_2" tabindex="8">
+                                <option value='none'>Select Race</option>
+                                <option value='caucasian'>Caucasian</option>
+                                <option value='asian'>Asian</option>
+                                <option value='asianI'>Asian - Indian</option>
+                                <option value='asianME'>Asian - Middle Eastern</option>
+                                <option value='black'>Black</option>
+                                <option value='native'>Native American/Pacific Islander</option>
+                                <option value='hispanic'>Latino/Latina/Latinx</option>
+                                <option value='other'>Other</option>
+                                <option value='unsure'>Unsure</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div class="row" id="exps_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="exp_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>Your best estimate of the person’s expression. If not in the choices, select "Other".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Facial Expression:</strong></label>
+                        </div>
+                        
+                        <div class="col"> 
+                            <select class="selectpicker" id="exp_1" name="exp_1" tabindex="9">
+                                <option value='none'>Expression</option>
+                                <option value='neutral'>Neutral</option>
+                                <option value='smiling'>Smiling</option>
+                                <option value='other'>Other</option>
+                            </select>
+                        </div>
+                        
+                    
+                        <div class="col">
+                            <select class="selectpicker" id="exp_2" name="exp_2" tabindex="10">
+                                <option value='none'>Expression</option>
+                                <option value='neutral'>Neutral</option>
+                                <option value='smiling'>Smiling</option>
+                                <option value='other'>Other</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="makeups_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="makeup_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>Does the person have makeup on, even if the makeup is applied lightly? If unsure, select "Unsure".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Makeup:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="makeup_1" name="makeup_1" tabindex="11">
+                                <option value='none'>Makeup</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                                <option value='unsure'>Unsure</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="makeup_2" name="makeup_2" tabindex="12">
+                                <option value='none'>Makeup</option>
+                                <option value='yes'>Yes</option>
+                                <option value='no'>No</option>
+                                <option value='unsure'>Unsure</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div class="row" id="rotates_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="hrotate_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>If you can see all the features (including both ears), select "neutral". If the head is tilted to the left or right so that one or both ears are not fully visible, select "Angled left/right". If the person is looking upward or downward so that some of the face features are not fully visible, select "Angled up/down".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Head Rotation:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="hrotate_1" name="hrotate_1" tabindex="13">
+                                <option value='none'>Rotation</option>
+                                <option value='neutral'>Neutral</option>
+                                <option value='alr'>Angled Left/Right</option>
+                                <option value='aup'>Angled Up/Down</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="hrotate_2" name="hrotate_2" tabindex="14">
+                                <option value='none'>Rotation</option>
+                                <option value='neutral'>Neutral</option>
+                                <option value='alr'>Angled Left/Right</option>
+                                <option value='aup'>Angled Up/Down</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="qualities_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="quality_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>If some of the face features are not fully visible due to extreme pixilation, select "Extremely Poor". If all face features are visible and clear and there is absence of pixilation, select "Extremely good". Else, select "average".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Image Quality:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="quality_1" name="quality_1" tabindex="15">
+                                <option value='none'>Quality</option>
+                                <option value='1'>1 - Extremely Poor</option>
+                                <option value='2'>2 - Average</option>
+                                <option value='3'>3 - Extremely Good</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="quality_2" name="quality_2" tabindex="16">
+                                <option value='none'>Quality</option>
+                                <option value='1'>1 - Extremely Poor</option>
+                                <option value='2'>2 - Average</option>
+                                <option value='3'>3 - Extremely Good</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="illuminations_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="illumination_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>If some of the face features are not fully visible due to extremely poor brightness or lighting condition, select "Extremely Poor". If all face features are visible and clear due to excellent brightness or lighting condition, select "Extremely good". Else, select "average".</p></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Illumination:</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="illumination_1" name="illumination_1" tabindex="17">
+                                <option value='none'>Illumination</option>
+                                <option value='1'>1 - Extremely Poor</option>
+                                <option value='2'>2 - Average</option>
+                                <option value='3'>3 - Extremely Good</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" id="illumination_2" name="illumination_2" tabindex="18">
+                                <option value='none'>Illumination</option>
+                                <option value='1'>1 - Extremely Poor</option>
+                                <option value='2'>2 - Average</option>
+                                <option value='3'>3 - Extremely Good</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="occs_pick" style="margin-top: 10px;">
+                        <div class="col">
+                            <label for="img_1p" id="occlusion_text"><button type="button" class="btn btn-secondary btn-sm" style="height: 60%;font-size: 11px; border-radius: 30px;" data-toggle="tooltip" data-html="true" title='<em><p>Occlusion refers to any extraneous objects that hinder face recognition. Select all that are present in the image. For guidance:</p>
+<ul><li>Digital filter – includes but not limited to app filters, watermarks, lettering from magazines, and other digital alterations</li> 
+<li>Face tattoo or marking – includes Bindi (coloured dot on forehead often worn on the forehead by Indians)</li> 
+<li>Foreign object – includes furniture, trees, and other foreign objects that are present in the image </li> 
+<li>Own hair – an occlusion if the person’s hair covers some of the face features</li> 
+</ul></em>'>
+                                  ?
+                                </button><strong>&nbsp;&nbsp;&nbsp;Any Occlusion?</strong></label>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" multiple id="occlusion_1" name="occlusion_1" tabindex="19">
+                                <optgroup label="Occlusion Type (Can Select Multiple):">
+                                    <option value='eyeglasses'>&emsp;Eyeglasses</option>
+                                    <option value='headcovering'>&emsp;Head Covering</option>
+                                    <option value='sunglasses'>&emsp;Sunglasses</option>
+                                    <option value='tattoo'>&emsp;Face Tattoo or Marking</option>
+                                    <option value='mask'>&emsp;Mask</option>
+                                    <option value='filter'>&emsp;Digital Filter</option>
+                                    <option value='ring'>&emsp;Nose or Face Ring</option>
+                                    <option value='hand'>&emsp;Hand/Part of Body</option>
+                                    <option value='facialhair'>&emsp;Facial Hair/Mustache</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <select class="selectpicker" multiple id="occlusion_2" name="occlusion_2" tabindex="20">
+                                <optgroup label="Occlusion Type (Can Select Multiple):">
+                                    <option value='eyeglasses'>&emsp;Eyeglasses</option>
+                                    <option value='headcovering'>&emsp;Head Covering</option>
+                                    <option value='sunglasses'>&emsp;Sunglasses</option>
+                                    <option value='tattoo'>&emsp;Face Tattoo or Marking</option>
+                                    <option value='mask'>&emsp;Mask</option>
+                                    <option value='filter'>&emsp;Digital Filter</option>
+                                    <option value='ring'>&emsp;Nose or Face Ring</option>
+                                    <option value='hand'>&emsp;Hand/Part of Body</option>
+                                    <option value='facialhair'>&emsp;Facial Hair/Mustache</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div id="inter" class="row d-flex justify-content-center" style="margin-top: 30px;  margin-bottom: -65px;">
+                        <div  class="align-self-center">
+                            <button class="buttons" id="next_btn" type="button" onclick="">Next</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <input type="submit" id="submitButton" name="commit" value="Complete HIT" style="visibility: hidden;"/>
+                </form>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script language='javascript'>
+            // init the form            
+            $('input[type=radio][name=occ]').change(function() {
+                if (this.value == 'occ_yes') {
+                    $('#occlusion').prop("disabled", false);
+                    $('#occlusion').selectpicker('refresh');
+                }
+                else if (this.value == 'occ_no') {
+                    $('#occlusion').prop("disabled", true);
+                    $('#occlusion').selectpicker('refresh');
+                }
+            });
+            
+            
+            //When the page has loaded.
+            // turkSetAssignmentID();
+            var current_datetime = new Date();
+            var date = current_datetime.getFullYear()+'-'+(current_datetime.getMonth()+1)+'-'+current_datetime.getDate();
+            var time = current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+            var current_datetime = date + ' ' + time;
+            document.getElementById('validation_quiz').style.visibility = 'hidden';
+
+            var current_time = 5;
+            var time_limit = 60 * 3000;
+            var total_time = 0;
+            var clicked = false;
+            var aipair = false;
+            document.getElementById('survey_form').style.visibility = 'hidden';
+            var files = [];
+            var can_continue = false;
+            var filenames;
+            var next_clicked = false;
+            var trap = false;
+            var counter = 0;
+            var visited = [];
+            
+            var timer_ext = setInterval(function(){
+                try {
+                    filenames = loadFile("https://difftask.s3.amazonaws.com/40_pairs_set3.txt").split('\n');
+                    clearInterval(timer_ext);
+                    can_continue = true;
+                } catch (err) {
+                    // pass
+                }
+            }, 500);
+            
+            document.getElementById('start_btn').style.visibility = 'visible';
+            var current_pair_ind = 0;
+            var user_result = {}
+            
+            // disable decision buttons
+            hide_buttons();         
+            
+            // set button events
+            document.getElementById("next_btn").onclick = function () {go_next(0, trap);};
+            
+            // create the time here
+            current_time = 0;
+            max_time = 0
+            var wait_flag = 0;
+            var show_final_dec = false;
+            var user_decided = false;
+            var second_half = false;
+            var clicked_count = 0;
+            var s_time, c_time, e_time;
+            
+            var timer = setInterval(function(){
+                if (not_started == false){
+                    current_time -= 1;
+                    total_time += 1;
+                    
+                    if (total_time >= time_limit || (visited.length == 0 && counter > 0 && current_time < 0)) {
+                        stop_survey();
+                    }
+                    
+                    if (current_time < 0) {
+                        user_decided = false;
+                        wait_flag = false;
+                        show_final_dec = true;
+                        
+                        // goto next image or case here
+                        // check if the survey is finished
+                        if(current_pair_ind == files.length) {
+                            stop_survey();
+                        }
+                        
+                        current_time = 60 * 30;
+                        
+                        // show a same picture in 10th and 40th
+                        if(trap) {
+                            current_pair_ind = counter - 1;
+                            trap = false;
+                        }
+                        if (counter > 38 && !second_half) {
+                            second_half = true;
+                            trap = true;
+                        }
+
+                        if (counter != 9 && counter != 39 && !second_half) {
+                            current_pair_ind += 1;
+                            trap = false;
+                        }
+                        else if (!trap && second_half) {
+                            var vis_ind = Math.floor((Math.random() * (visited.length - 1)));
+                            current_pair_ind = visited.splice(vis_ind, 1)[0];
+                            trap = false;
+                        } else {
+                            current_pair_ind = files.length - 2;
+                            trap = true;
+                        }
+                        
+                        $("#img1").attr("src", files[current_pair_ind][0]);
+                        $("#img2").attr("src", files[current_pair_ind][1]);
+                        document.getElementById('next_btn').style.visibility = 'visible';
+
+                        if(trap) {
+                            // only show the same person!
+                            document.getElementById('age_text').style.visibility = 'hidden';
+                            document.getElementById('color_text').style.visibility = 'hidden';
+                            document.getElementById('hair_text').style.visibility = 'hidden';
+                            document.getElementById('genders_pick').style.visibility = 'hidden';
+                            document.getElementById('races_pick').style.visibility = 'hidden';
+                            document.getElementById('exps_pick').style.visibility = 'hidden';
+                            document.getElementById('makeups_pick').style.visibility = 'hidden';
+                            document.getElementById('rotates_pick').style.visibility = 'hidden';
+                            document.getElementById('qualities_pick').style.visibility = 'hidden';
+                            document.getElementById('illuminations_pick').style.visibility = 'hidden';
+                            document.getElementById('occs_pick').style.visibility = 'hidden';
+                        }
+                        else {
+                            document.getElementById('age_text').style.visibility = 'visible';
+                            document.getElementById('color_text').style.visibility = 'visible';
+                            document.getElementById('hair_text').style.visibility = 'visible';
+                            document.getElementById('genders_pick').style.visibility = 'visible';
+                            document.getElementById('races_pick').style.visibility = 'visible';
+                            document.getElementById('exps_pick').style.visibility = 'visible';
+                            document.getElementById('makeups_pick').style.visibility = 'visible';
+                            document.getElementById('rotates_pick').style.visibility = 'visible';
+                            document.getElementById('qualities_pick').style.visibility = 'visible';
+                            document.getElementById('illuminations_pick').style.visibility = 'visible';
+                            document.getElementById('occs_pick').style.visibility = 'visible';
+                        }
+
+                        counter += 1;
+                        if(current_pair_ind != 40 && !second_half)
+                            visited.push(current_pair_ind);
+                        console.log(counter, current_pair_ind, trap, visited);
+                        go_next(current_time);
+                    }
+                    
+                    // show remaining time
+                    var time = time_limit - total_time;
+                    var minutes = Math.floor(time / 60);
+                    var seconds = time - minutes * 60;
+                    var finalTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+                }
+
+            }, 1000);
+            
+            function get_time() {
+                // returns UTC date time in format dateTtime
+                d = new Date();
+                return d.getUTCMonth()+1 + '/' + d.getUTCDate() + '/' + d.getUTCFullYear() + 'T' + d.getUTCHours() + ':' + d.getUTCMinutes() + ':' + d.getUTCSeconds() + ':' + d.getUTCMilliseconds();
+            }
+            
+            function str_pad_left(string,pad,length) {
+                return (new Array(length+1).join(pad)+string).slice(-length);
+            }
+            
+            function getFormData($form){
+                var unindexed_array = $form.serializeArray();
+                var indexed_array = {};
+
+                $.map(unindexed_array, function(n, i){
+                    indexed_array[n['name']] = n['value'];
+                });
+
+                return indexed_array;
+            }
+            
+            // next button -> resets the form
+            function go_next(t, trap) {
+                next_clicked = true;
+                c_time = get_time();
+                e_time = c_time;
+                
+                // save the final result
+                // record time
+                var img1_path = document.getElementById('img1').getAttribute('src').split("/");
+                var img2_path = document.getElementById('img2').getAttribute('src').split("/");
+                img1_path = img1_path[img1_path.length - 1];
+                img2_path = img2_path[img2_path.length - 1];
+
+                var $form = $("#mturk_form");
+                var user_data = getFormData($form);
+                user_data['occlusion_1'] = $('#occlusion_1').val();
+                user_data['occlusion_2'] = $('#occlusion_2').val();
+                user_data['race_1'] = $('#race_1').val();
+                user_data['race_2'] = $('#race_2').val();
+                // console.log(JSON.stringify(user_data));
+                
+                // change color to black for all
+                for(var key in user_data) {
+                    if(key == "assignmentId")
+                        continue;
+
+                    var value = user_data[key];
+                    
+                    if(key.indexOf('_') > -1) {
+                        key = key.split('_')[0];
+                    }
+
+                    $("#" + key + "_text").css("color", "black");
+                }
+                
+                // validate form
+                if(t == 0 && !trap){
+                    var valid = true;
+                    for(var key in user_data) {
+                        if(key == "assignmentId" || key == 'occlusion_2' || key == 'occlusion_1')
+                            continue;
+                        
+                        var value = user_data[key];
+
+                        // console.log(key, value);
+                        
+                        if(value == "none" || value.length == 0) {
+                            valid = false;
+                            
+                            // change the color of the related item
+                            if(key.indexOf('_') > -1) {
+                                key = key.split('_')[0];
+                            }
+                            
+                            $("#" + key + "_text").css("color", "red");
+                        }
+                    }
+                    
+                    if(!valid) {
+                        // FORMVALIDATION
+                        // return false;
+                    }
+                } else if (t == 0 && trap) {
+                    //console.log("trap question!");
+                    //console.log(user_data['same']);
+                    // check the trap answers
+                    if(user_data['same'] == 'none') {
+                        alert('Please Choose One of the Options!');
+                        return false;
+                    }
+                    if (user_data['same'] != 'no') {
+                        // test failed!
+                        alert('You Failed the Trap Question!');
+                        // stop_survey();
+                        // return false;
+                        // return true;
+                    }
+                    trap = false;
+                }
+                
+                // check race
+                if(user_data['race_1'].length > 1 && user_data['race_1'].indexOf('unsure') > -1) {
+                    alert('Please check the selected race for image 1!');
+                    return false;
+                }
+                
+                if(user_data['race_2'].length > 1 && user_data['race_2'].indexOf('unsure') > -1) {
+                    alert('Please check the selected race for image 2!');
+                    return false;
+                }
+                
+                // reset time
+                current_time = t;
+                
+                // add to array
+                if(current_time == 0 && !trap)
+                    user_result[counter] = img1_path + '==' + img2_path + '|' + JSON.stringify(user_data) + '|' + clicked + '|' + s_time + '|' + c_time + '|' + e_time + '|' + next_clicked;
+                else if (current_time == 0 && trap)
+                    user_result[counter] = img1_path + '==' + img2_path + '|' + JSON.stringify(user_data) + '|' + clicked + '|' + s_time + '|' + c_time + '|' + e_time + '|' + next_clicked;
+
+                
+                // reset form
+                document.getElementById('mturk_form').reset();
+                $('#gender_1').val('none');
+                $('#gender_1').selectpicker('refresh');
+                $('#race_1').val('none');
+                $('#race_1').selectpicker('refresh');
+                $('#exp_1').val('none');
+                $('#exp_1').selectpicker('refresh');
+                $('#makeup_1').val('none');
+                $('#makeup_1').selectpicker('refresh');
+                $('#hrotate_1').val('none');
+                $('#hrotate_1').selectpicker('refresh');
+                $('#quality_1').val('none');
+                $('#quality_1').selectpicker('refresh');
+                $('#illumination_1').val('none');
+                $('#illumination_1').selectpicker('refresh');
+                $('#age').val('none');
+                $('#age').selectpicker('refresh');
+                
+                $('#gender_2').val('none');
+                $('#gender_2').selectpicker('refresh');
+                $('#race_2').val('none');
+                $('#race_2').selectpicker('refresh');
+                $('#exp_2').val('none');
+                $('#exp_2').selectpicker('refresh');
+                $('#makeup_2').val('none');
+                $('#makeup_2').selectpicker('refresh');
+                $('#hrotate_2').val('none');
+                $('#hrotate_2').selectpicker('refresh');
+                $('#quality_2').val('none');
+                $('#quality_2').selectpicker('refresh');
+                $('#illumination_2').val('none');
+                $('#illumination_2').selectpicker('refresh');
+                
+                $('#occlusion_1').val('none');
+                $('#occlusion_1').selectpicker('refresh');
+                $('#occlusion_2').val('none');
+                $('#occlusion_2').selectpicker('refresh');
+                $('#hair').val('none');
+                $('#hair').selectpicker('refresh');
+                $('#color').val('none');
+                $('#color').selectpicker('refresh');
+                $('#same').val('none');
+                $('#same').selectpicker('refresh');
+                
+            }
+            
+            
+            function submit_survey() {                 
+                $("#mturk_form").submit( function(eventObj) {
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "user_response")
+                          .attr("value", JSON.stringify(user_result))
+                          .appendTo("#mturk_form");
+
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "open_time")
+                          .attr("value", current_datetime)
+                          .appendTo("#mturk_form");
+
+                      $("<input />").attr("type", "hidden")
+                          .attr("name", "pairs_inds")
+                          .attr("value", JSON.stringify(visited))
+                          .appendTo("#mturk_form");
+
+                      $("<input />").attr("type", "hidden")
+                            .attr("name", "validation_quiz")
+                            .attr("value", "success!")
+                            .appendTo("#mturk_form");
+
+                      return true;
+                });
+                document.getElementById('submitButton').click();
+            }
+            
+            // stop survey func
+            function stop_survey() {
+                // stop survey and show the final prompt
+                clearInterval(timer);
+                document.getElementById('survey_form').style.visibility = 'hidden';
+                document.getElementById('survey_form').style.display = 'none';
+                submit_survey();
+            } 
+                
+            
+            // show and hide buttons functions
+            function show_buttons() {
+                document.getElementById('inter').style.visibility = 'visible';
+            }
+            
+            function hide_buttons() {
+                document.getElementById('inter').style.visibility = 'hidden';
+            }
+            
+            $(document).ready(function() {
+                // tooltips
+                $('a[data-toggle="tooltip"]').tooltip({
+                    animated: 'fade',
+                    placement: 'right',
+                    html: true
+                });
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+        <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    </body>
+</html>

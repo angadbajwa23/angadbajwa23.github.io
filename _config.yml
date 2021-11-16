@@ -11,7 +11,7 @@ title                    : "Angad Ripudaman Singh Bajwa"
 title_separator          : "-"
 name                     : &name "Angad"
 description              : &description "Final year student at National Institute of Technology Tiruchirappalli"
-url                      : https://davood-m.github.io/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://mmistakes.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : ""
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -72,16 +72,16 @@ social:
 
 
 # Analytics
-analytics:
-  provider               :  "google" # false (default), "google", "google-universal", "custom"
-  google:
-    tracking_id          : UA-137394490-1
+#analytics:
+#  provider               :  "google" # false (default), "google", "google-universal", "custom"
+#  google:
+#    tracking_id          : UA-137394490-1
 
 
 # Site Author
 author:
   name             : "Angad Ripudaman Singh Bajwa"
-  avatar           : "assets/images/angad.jpg"
+  avatar           : "angad.jpg"
   bio              : "Final year student at NIT Tiruchirappalli"
   location         : "Mumbai,India"
   employer         :
