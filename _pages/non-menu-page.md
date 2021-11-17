@@ -8,10 +8,8 @@ redirect_from:
   - "/nmp.html"
 ---
 
-This is a page not in the menu. You can use markdown in this page.
+**Projects**
 
-Heading 1
-======
 
-Heading 2
-======
+- Extract- Text Extractions
+
