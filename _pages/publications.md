@@ -7,7 +7,9 @@ author_profile: true
 
 
 
- **Brain Image Segmentation**
+
+
+ **<u>Brain Image Segmentation</u>**
 
 Segmentation of brain tissues in MRI image has a number of applications in diagnosis, surgical planning, and treatment of brain abnormalities. However, it is a time-consuming task to be performed by medical experts. In addition to that, it is challenging due to intensity overlap between the different tissues caused by the intensity homogeneity and artifacts inherent to MRI. Tominimize this effect, it was proposed to apply histogram based preprocessing. The goal of this project was to develop a robust and automatic segmentation of the human brain.
 
