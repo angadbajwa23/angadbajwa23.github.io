@@ -19,14 +19,14 @@ To tackle the problem, I have used a Convolutional Neural Network (CNN) based ap
 
 
 
-**Extract- Text Extraction**
+**<u>Extract- Text Extraction</u>**
 
 EXTRACT is an optical character recognition engine for various operating systems which extracts texts from an image and converts them to plain text.This model is a very primitive form of the original google tesseract which extracts texts from an image and converts them to plain text.
 [Code](https://github.com/angadbajwa23/Text_Extraction)
 
 
 
-**Air Pollution Analyzer**
+**<u>Air Pollution Analyzer</u>**
 
 Analyzed air pollution data in New Delhi over the past 20 years by studying specific pollutant levels in
 each area and visualized the pollution patterns using Python, Pandas, NumPy,Matplotlib and Seaborn
@@ -35,7 +35,7 @@ libraries.
 
 
 
-**Image Background Remover**
+**<u>Image Background Remover</u>**
 
 Using Computer Vision and Deep Learning to remove background of input images.
 [Code](https://github.com/angadbajwa23/Image-Background-Remover)
@@ -43,7 +43,7 @@ Using Computer Vision and Deep Learning to remove background of input images.
 
 
 
-**Promoting Innovation in National Institute Of Technology Tiruchirappalli**
+**<u>Promoting Innovation in National Institute Of Technology Tiruchirappalli</u>**
 
 Hackathon project to simplify the process of internship, project collaboration and placements by creating
 a unique Research Quotient for every candidate. Implemented in at NIT Trichy and selected for Smart
@@ -52,7 +52,7 @@ India Hackathon 2020.
 
 
 
-**Nirbhay-Hackathon at National Institute Of Technology Surathkal**
+**<u>Nirbhay-Hackathon at National Institute Of Technology Surathkal</u>**
 
 Hackathon project to ensure women safety by creating an app to simplify travel. The project aimed at
 providing a compatible and suitable companion to ensure safe travel by comparing routes and facial
