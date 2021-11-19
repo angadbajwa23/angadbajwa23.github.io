@@ -10,7 +10,7 @@ redirect_from:
 # About me
 Hi!
 
-My name is Angad Ripudaman Singh Bajwa. Currently, I am a fourth year student at the [National Institute of Technology Tiruchirappalli](https://www.nitt.edu/). My research interest mainly lies in Machine Learning and Computer Vision. 
+My name is Angad Ripudaman Singh Bajwa. Currently, I am a fourth-year student pursuing my Bachelor of Technology (B.Tech) in Electrical and Electronics Engineering at the [National Institute of Technology Tiruchirappalli](https://www.nitt.edu/). My research interest mainly lies in Machine Learning and Computer Vision. 
 
 My resume is available [here](https://drive.google.com/file/d/1rkvuHQnMqHLIYcwfYU9vxePwQgJHdKxA/view?usp=sharing) 
 
