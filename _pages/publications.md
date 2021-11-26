@@ -11,9 +11,9 @@ author_profile: true
 
  **<u>Brain Image Segmentation</u>**
 
-Segmentation of brain tissues in MRI image has a number of applications in diagnosis, surgical planning, and treatment of brain abnormalities. However, it is a time-consuming task to be performed by medical experts. In addition to that, it is challenging due to intensity overlap between the different tissues caused by the intensity homogeneity and artifacts inherent to MRI. Tominimize this effect, it was proposed to apply histogram based preprocessing. The goal of this project was to develop a robust and automatic segmentation of the human brain.
+Segmentation of brain tissues in MRI image has a number of applications in diagnosis, surgical planning, and treatment of brain abnormalities. However, it is a time-consuming task to be performed by medical experts. In addition to that, it is challenging due to intensity overlap between the different tissues caused by the intensity homogeneity and artifacts inherent to MRI. The goal of this project was to develop a robust and automatic segmentation of the human brain.
 
-To tackle the problem, I have used a Convolutional Neural Network (CNN) based approach. U-net is one of the most commonly used and best-performing architecture in medical image segmentation. This moodel consists of the 2-D implementation of the U-Net.The performance was evaluated using Dice Coefficient (DSC).
+To tackle the problem, we have used a Convolutional Neural Network (CNN) based approach. U-net is one of the most commonly used and best-performing architecture in medical image segmentation. This moodel consists of the 2-D implementation of the U-Net.The performance was evaluated using Dice Coefficient (DSC).
 [Code](https://github.com/angadbajwa23/Segmentation-of-2D-Brain-MR-Images-using-Deep-Neural-Architectures)
 
 
